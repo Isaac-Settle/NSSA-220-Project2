@@ -1,4 +1,7 @@
 def parse() :
-	print('called parse function in packet_parser.py')
-
+	f = open('Captures\example.txt')
+	line = f.readline()
+	while line:
+		packet = {}
+		line = f.readline()
 	
