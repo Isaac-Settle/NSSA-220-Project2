@@ -1,4 +1,5 @@
 import re
+from Packet import Packet
 
 def get_ip_string(hex_bytes):
 	IP = ""
@@ -7,11 +8,15 @@ def get_ip_string(hex_bytes):
 		if (i < 3): IP += "."
 	return IP
 
+def convert_hex_to_int(hex_bytes):
+	full_bytes = ""
+	for byte in hex_bytes:
+		full_bytes += byte
+	value = int(full_bytes,16)
+	return value
 
-
-def parse() :
-	ethernet2_header_length = 14
-
+def parse():
+	packets = []
 	f = open('Captures\example.txt')
 	line = f.readline()
 	while line:
@@ -19,35 +24,45 @@ def parse() :
 			line = f.readline().strip()
 			# split whenever there is 2 or more spaces
 			split = re.split(' {2,}', line) 
-			#num = int(split[0])
 
-			# time = float(split[1])
-			# source = split[2]
-			# destination = split[3]
-			# protocol = split[4]
-			# length = int(split[5])
-			# info_name = split[6]
-			# info_data = split[7]
-
+			time = float(split[0].split(' ')[1])
 
 			f.readline()
 			line = f.readline().strip()
 
+
+			# reads
 			hex_bytes = []
 			while line:
 				split = re.split(' {2,}', line)
 				hex_bytes += split[1].split(' ')
 				line = f.readline().strip()
 
-			sourceIP = getIPString(hex_bytes[26:30])
-			destIP = getIPString(hex_bytes[30:34])
+			ip_length = convert_hex_to_int(hex_bytes[16:18])
+			ttl = convert_hex_to_int(hex_bytes[22])
+			source_ip = get_ip_string(hex_bytes[26:30])
+			dest_ip = get_ip_string(hex_bytes[30:34])
+			icmp_type = convert_hex_to_int(hex_bytes[34])
+			sequence_num = convert_hex_to_int(hex_bytes[40:42])
+			data_size = len(hex_bytes[42:])
 
-			print(sourceIP)
-			print(destIP)
-			#destIP = 
+			p = Packet(
+				time,
+				ip_length,
+				ttl,
+				source_ip,
+				dest_ip,
+				icmp_type,
+				sequence_num,
+				data_size
+			)
+			packets.append(p)
 
-			print(hex_bytes)
+			print(p)
+
+
 
 		line = f.readline()
+	return packets
 
 parse()
