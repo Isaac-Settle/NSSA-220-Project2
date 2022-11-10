@@ -15,9 +15,9 @@ def convert_hex_to_int(hex_bytes):
 	value = int(full_bytes,16)
 	return value
 
-def parse():
+def parse(filename):
 	packets = []
-	f = open('Captures\example.txt')
+	f = open(filename)
 	line = f.readline()
 	while line:
 		if (line[:3] == "No."):
@@ -31,7 +31,7 @@ def parse():
 			line = f.readline().strip()
 
 
-			# reads
+			# reads the hex data into a list
 			hex_bytes = []
 			while line:
 				split = re.split(' {2,}', line)
@@ -58,11 +58,7 @@ def parse():
 			)
 			packets.append(p)
 
-			print(p)
-
-
-
 		line = f.readline()
 	return packets
 
-parse()
+#parse()
