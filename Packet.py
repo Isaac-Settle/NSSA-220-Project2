@@ -1,7 +1,7 @@
 class Packet:
 
     def __init__(self, time, ip_length, ttl, source_ip, dest_ip, icmp_type, sequence_num, data_size):
-        self.time = time,
+        self.time = float(time)
         self.ip_length = ip_length
         self.ttl = ttl
         self.source_ip = source_ip

@@ -24,9 +24,7 @@ def parse(filename):
 			line = f.readline().strip()
 			# split whenever there is 2 or more spaces
 			split = re.split(' {2,}', line) 
-
 			time = float(split[0].split(' ')[1])
-
 			f.readline()
 			line = f.readline().strip()
 
@@ -56,6 +54,7 @@ def parse(filename):
 				sequence_num,
 				data_size
 			)
+
 			packets.append(p)
 
 		line = f.readline()
