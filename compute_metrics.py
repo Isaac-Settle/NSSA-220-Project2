@@ -1,7 +1,17 @@
 from Packet import Packet
 import sys
 
+"""
+    Calculates data for each node
+
+    @author Riley Basile-Benson, Jose Nunez
+"""
+
 def calc_num_echo_req_replies_sent(node_list, source_node_ip):
+    """
+        Calculates the number of requests sent
+        and replies sent given a particular node
+    """
     requests = []
     replies = []
     for packet in node_list:
@@ -13,6 +23,10 @@ def calc_num_echo_req_replies_sent(node_list, source_node_ip):
 
 
 def calc_num_echo_req_replies_recvd(node_list, node_ip):
+    """
+        Calculates the number of requests received
+        and replies receieved given a particular node
+    """
     requests_recvd = []
     replies_recvd = []
     for packet in node_list:
@@ -24,6 +38,10 @@ def calc_num_echo_req_replies_recvd(node_list, node_ip):
 
 
 def calc_request_bytes(requests_sent, requests_recvd):
+    """
+        Calculates the amount of data sent and received
+        including the headers and without
+    """
     ETHERNET_HEADER_LENGTH = 14
     bytes_requests_sent = 0
     bytes_requests_recvd = 0
@@ -44,6 +62,10 @@ def calc_request_bytes(requests_sent, requests_recvd):
 
 
 def calc_rtt(requests_sent, replies_recvd):
+    """
+        Calculates the round trip time using the 
+        times reported in wireshark
+    """
     total_rtt = 0
     num_trips = 0
     for request in requests_sent:
@@ -55,6 +77,10 @@ def calc_rtt(requests_sent, replies_recvd):
 
 
 def calc_reply_delay(requests_recvd, replies_sent):
+    """
+        Calculates the amount of time to create 
+        a reply from times in wireshark
+    """
     reply_delay = 0
     num_replies = 0
     for request_in in requests_recvd:
@@ -66,6 +92,8 @@ def calc_reply_delay(requests_recvd, replies_sent):
 
 
 def calc_average_hop_count(replies_recvd):
+    """
+    """
     STANDARD_TTL = 128
     total_ttl = 0
     num_ttl = 0
@@ -76,7 +104,8 @@ def calc_average_hop_count(replies_recvd):
 
 
 def compute(node1_list, node2_list, node3_list, node4_list):
-    # Compute method take in 4 lists, each corresponding to a node. This function will compute metrics for each of the node files using the list passed in.
+    # Compute method take in 4 lists, each corresponding to a node. 
+
 
     # Variables
     NodeIPs = {}
@@ -93,7 +122,8 @@ def compute(node1_list, node2_list, node3_list, node4_list):
 
     f = open('output.csv', 'w')
     sys.stdout = f
-
+    # change stdout to the file object 
+    # so we can use print
 
     for i in range(4):
 

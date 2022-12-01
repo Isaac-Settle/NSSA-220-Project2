@@ -1,3 +1,7 @@
+"""
+    Object that stores packet data
+"""
+
 class Packet:
 
     def __init__(self, time, ip_length, ttl, source_ip, dest_ip, icmp_type, sequence_num, data_size):

@@ -1,7 +1,6 @@
 # NSSA 220 - Project 2 - Packet Capture Analysis Tool
 # Riley Basile-Benson, Isaac Settle, and Jose Nunez
 
-
 import filter_packets as f
 import packet_parser as p
 import compute_metrics as c
