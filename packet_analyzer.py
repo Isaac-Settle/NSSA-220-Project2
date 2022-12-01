@@ -2,13 +2,16 @@
 # Riley Basile-Benson, Isaac Settle, and Jose Nunez
 
 
-from filter_packets import *
-from packet_parser import *
-from compute_metrics import *
+import filter_packets as f
+import packet_parser as p
+import compute_metrics as c
 
-#filter()
-node1_list = parse("Captures\\Node1_filtered.txt")
-node2_list = parse("Captures\\Node2_filtered.txt")
-node3_list = parse("Captures\\Node3_filtered.txt")
-node4_list = parse("Captures\\Node4_filtered.txt")
-compute(node1_list, node2_list, node3_list, node4_list)
+f.filter("Captures/Node1.txt")
+f.filter("Captures/Node2.txt")
+f.filter("Captures/Node3.txt")
+f.filter("Captures/Node4.txt")
+node1_list = p.parse("Captures\\Node1_filtered.txt")
+node2_list = p.parse("Captures\\Node2_filtered.txt")
+node3_list = p.parse("Captures\\Node3_filtered.txt")
+node4_list = p.parse("Captures\\Node4_filtered.txt")
+c.compute(node1_list, node2_list, node3_list, node4_list)

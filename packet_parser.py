@@ -59,5 +59,3 @@ def parse(filename):
 
 		line = f.readline()
 	return packets
-
-#parse()
