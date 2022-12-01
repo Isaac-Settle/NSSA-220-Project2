@@ -1,6 +1,15 @@
+"""
+A module to filter through packets and output only request and replies to a file.
+
+@author Isaac Settle
+"""
 import re
 import sys
 def filter(filename):
+	"""
+	Filters through packets and anytime a request or reply packet 
+	is found it writes to a file with the entire packet.
+	"""
 	length = len(filename)
 	write = open(filename[0:length-4] + "_filtered.txt", 'w')
 	sys.stdout = write
@@ -20,8 +29,9 @@ def filter(filename):
 						var = False
 					if(line==""):
 						increment+=1
-			prevLine = line
-			# do things
+			prevLine = line 
+			# Used to store the previous line in the scenario where the packet is a request / reply 
+			# and needs to print the entire packet INCLUDING the first line.
 	write.close()
 
 def main():
